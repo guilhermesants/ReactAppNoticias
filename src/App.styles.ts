@@ -7,8 +7,19 @@ export const Container = styled.div`
 
 export const Area = styled.div`
     margin: auto;
-    //max-width: 980px;
     padding: 10px;
+    width: 1300px;
+`;
+
+export const LoaderArea = styled.div`
+    width: 100%;
+    background-color: #c7c7c7;
+    //margin:auto;
+    display: inline-block;
+`;
+
+export const TextLoad = styled.p`
+
 `;
 
 export const Header = styled.h1`
@@ -18,9 +29,7 @@ export const Header = styled.h1`
     text-align: center;
     border-bottom: 1px solid #444;
     padding-bottom: 20px;
-    //position: fixed;
-    //width: 100%;
-    
+
 `;
 
 export const Category = styled.div`
@@ -28,4 +37,5 @@ export const Category = styled.div`
     //max-width: 980px;
     padding: 10px;
     width: fit-content;
+    border-bottom: 1px solid #444;
 `;

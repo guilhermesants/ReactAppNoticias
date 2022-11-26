@@ -1,16 +1,20 @@
-interface Isource {
-    id: string;
-    name: string
+// interface Isource {
+//     id: string;
+//     name: string
+// }
+
+type Category = {
+    idCategory: number;
+    name: string;
 }
 
 export interface INewsInterface {
     id?: string;
-    source?: Isource;
-    author?: string;
     title: string;
     description: string;
     url: string;
     urlToImage: string;
     publishedAt: string;
-    content: string;
+    category: Category;
+    idCategory: number;
 }

@@ -1,6 +1,6 @@
 {
     "name": "newsapp",
     "displayName": "newsapp",
-    "defaultHost": "https://newsapi.org/v2",
+    "defaultHost": "http://apicloudcomp.com.iron.hostazul.com.br",
     "api_Key": ""
   }

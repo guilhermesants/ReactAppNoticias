@@ -7,11 +7,12 @@ export const Area = styled.div`
     border-radius: 25px;
     margin-top: 10px;
     margin-left: 7px;
-    margin-right: 7px;
+    margin-right: 18px;
     display: inline-block;
-    /* -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
-    -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
-    box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77); */
+    -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.20);
+    -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.20);
+    box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.20);
+    
 `;
 
 export const Title = styled.p`
@@ -35,6 +36,6 @@ export const Button = styled.button`
     padding-left: 100px;
     padding-top: 20px;
     &:hover {
-        color: #eba417;
+        color: #c7c7c7;
     }
 `;

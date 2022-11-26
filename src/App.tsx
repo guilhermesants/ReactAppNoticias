@@ -24,32 +24,37 @@ const App = () => {
   const [newsList, setnewslist] = useState<INewsInterface[]>([]);
   const [categoryList, setCategoryList] = useState(CategoryList);
   const [loader, setLoader] = useState(true);
+  const [header, setHeader] = useState<string>("Notícias");
 
   useEffect(() => {
     getNews();
   }, [])
 
   const setUuidtoList = (articles: INewsInterface[]) => {
-    const newsArticles: INewsInterface[] = articles.map((item) => {
+    const newsArticles: INewsInterface[] = articles.map((item, index) => {
       return {...item, id: uuidv4()}
     });
 
     return newsArticles.filter((item) => item.urlToImage !== null);
   }
 
-  const getNews = async (categoryName?: string) => {
+  const getNews = async (id?: number) => {
     setLoader(true);
     setTimeout(async() => {
       try {
 
-        const listOfNews = categoryName ? await getTopHeadLines(categoryName) : await getTopHeadLines();
-        
-        const { articles } = listOfNews.data;
-        console.log(listOfNews.data);
-        const newsArticles = setUuidtoList(articles);
-        
+        const listOfNews = await getTopHeadLines();
+        let newsArticles: INewsInterface[] = listOfNews.data;
+
+        if (id !== undefined) {
+          newsArticles = newsArticles.filter(c => c.idCategory === id);
+          const category = categoryList.filter(c => c.id === id);
+
+
+          setHeader("Notícias - " + category[0].name);
+        }
+
         setnewslist(newsArticles);
-        console.log(newsArticles);
       } catch (error) {
         //showAlert(true, 'Ops! Algo deu errado, tente novamente mais tarde.')
       } finally {
@@ -63,13 +68,13 @@ const App = () => {
   return (
     <C.Container>
       <C.Area>
-        <C.Header>Top Notícias</C.Header>
+        <C.Header>{header}</C.Header>
 
       <C.Category>
-        {categoryList.map((item) =>(
+        {categoryList.map((item, index) =>(
           <CategoryComponet
           categoryName={item.name}
-          categoryNameTranslated={item.translatedName}
+          id={item.id}
           search={getNews}
           /> 
         ))}
@@ -79,27 +84,31 @@ const App = () => {
 
           {loader === true ?
           <>
-            <ContentLoader 
-              speed={2}
-              width={400}
-              height={160}
-              viewBox="0 0 400 160"
-              backgroundColor="#f3f3f3"
-              foregroundColor="#ecebeb"
-            >
-              <rect x="18" y="20" rx="0" ry="0" width="4" height="1" /> 
-              <circle cx="195" cy="93" r="53" />
-            </ContentLoader> 
+              {/* <C.LoaderArea>
+                <ContentLoader 
+                speed={2}
+                width={400}
+                height={400}
+                viewBox="0 0 400 400"
+                backgroundColor="#c7c7c7"
+                foregroundColor="#ecebeb"
+                >
+                  <rect x="0" y="56" rx="3" ry="3" width="410" height="6" />
+            </ContentLoader>  
+            </C.LoaderArea> */}
+  
           </>
         :
           <>
-          {newsList.map((item) => (
+          {newsList.map((item, index) => (
+            
             <Card
               url={item.url}
               title={item.title}
               date={Format.formatDate(item.publishedAt)}
               image={item.urlToImage}
             ></Card>
+           
           ))}
         </>}
     
